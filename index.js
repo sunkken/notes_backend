@@ -1,4 +1,3 @@
-const cors = require('cors')
 const express = require('express')
 const app = express()
 
@@ -28,14 +27,9 @@ const requestLogger = (request, response, next) => {
   next()
 }
 
-const corsOptions = {
-  origin: 'http://127.0.0.1:5173',
-  optionSuccessStatus: 200
-}
-
-app.use(cors(corsOptions))
-app.use(express.json())
 app.use(requestLogger)
+app.use(express.static('dist'))
+app.use(express.json())
 
 app.get('/', (request, response) => {
   response.send('<h1>Hello World!</h1>')
